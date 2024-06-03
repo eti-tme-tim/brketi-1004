@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: airline-kiosks
+data:
+  KIOSK_1: Air_Canada
+  KIOSK_2: United
+  KIOSK_3: JetBlue

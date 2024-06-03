@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: sidecar-logger
+  name: sidecar-logger
+  namespace: default
+spec:
+  containers:
+  - name: main-app
+    command: [/bin/sh, -c, i=0; while true; do echo INFO $i $(date) >> /var/log/app.log; i=$((i+1)); sleep 1; done]
+    image: busybox
+    volumeMounts:
+    - mountPath: /var/log
+      name: shared-volume
+  - name: sidecar
+    image: busybox
+    command: [/bin/sh, -c, tail -n+1 -f /var/log/app.log]
+    volumeMounts:
+    - mountPath: /var/log
+      name: shared-volume
+  volumes:
+  - name: shared-volume
+    emptyDir: {}

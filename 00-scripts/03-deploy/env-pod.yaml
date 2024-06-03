@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: env-pod
+  name: env-pod
+spec:
+  containers:
+  - image: nginx
+    name: env-pod
+    env:
+    - name: VARIABLE-1
+      value: "foo"
+    - name: VARIABLE-2
+      value: "bar"
+    - name: USERNAME
+      value: "username"
+    - name: PASSWORD
+      value: "password"
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always

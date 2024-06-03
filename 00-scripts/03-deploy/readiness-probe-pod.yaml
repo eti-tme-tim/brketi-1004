@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: readiness-probe-pod
+  name: readiness-probe-pod
+spec:
+  containers:
+  - image: nginx
+    name: readiness-probe-pod
+    readinessProbe:
+      tcpSocket:
+        port: 80
+      failureThreshold: 3
+      successThreshold: 5
+      periodSeconds: 2
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
